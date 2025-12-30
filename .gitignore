@@ -1,0 +1,31 @@
+# Dependencias
+node_modules/
+
+# Carpeta de descargas
+downloads/
+
+# Archivos de compilacion
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Variables de entorno
+.env
+.env.local
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Binario de yt-dlp (se descarga automaticamente)
+bin/yt-dlp.exe

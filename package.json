@@ -1,0 +1,27 @@
+{
+    "name": "playlist-downloader",
+    "version": "1.0.0",
+    "description": "Descargador de playlists de YouTube",
+    "main": "server.js",
+    "author": "PlaylistDL",
+    "license": "MIT",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js",
+        "electron": "electron .",
+        "build": "electron-builder --win"
+    },
+    "dependencies": {
+        "archiver": "^7.0.1",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "socket.io": "^4.7.2"
+    },
+    "devDependencies": {
+        "electron": "^28.0.0",
+        "electron-builder": "^24.9.1"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}

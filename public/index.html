@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Playlist Downloader</title>
+    <meta name="description" content="Descarga canciones de playlists de YouTube fácilmente">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Monetag Ads -->
+    <script src="https://quge5.com/88/tag.min.js" data-zone="197315" async data-cfasync="false"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18V5l12-2v13" />
+                        <circle cx="6" cy="18" r="3" />
+                        <circle cx="18" cy="16" r="3" />
+                    </svg>
+                </div>
+                <h1>PlaylistDL</h1>
+            </div>
+            <p class="tagline">Descarga playlists de YouTube en segundos</p>
+            <p class="tagline-sub">MP3 y MP4 • Alta calidad • Gratis y sin límites</p>
+        </header>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="feature-card">
+                <div class="feature-icon speed-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                </div>
+                <h3>Súper Rápido</h3>
+                <p>Descarga hasta 6 canciones simultáneamente</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon quality-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                </div>
+                <h3>Alta Calidad</h3>
+                <p>Hasta 320kbps en MP3 y 4K en video</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon free-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </div>
+                <h3>100% Gratis</h3>
+                <p>Sin registro, sin anuncios, sin límites</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon metadata-feature">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                </div>
+                <h3>Con Carátulas</h3>
+                <p>Metadatos y carátulas automáticas</p>
+            </div>
+        </section>
+
+        <!-- How it Works Section -->
+        <section class="how-it-works">
+            <h2 class="section-title">¿Cómo funciona?</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Copia el enlace</h4>
+                        <p>Copia el enlace de cualquier playlist de YouTube</p>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Selecciona las canciones</h4>
+                        <p>Elige las que quieras, formato y calidad</p>
+                    </div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>¡Descarga!</h4>
+                        <p>Descarga todo en un ZIP o individualmente</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="input-section glass-card">
+            <h2 class="input-title">Comienza ahora</h2>
+            <div class="input-wrapper">
+                <div class="input-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                    </svg>
+                </div>
+                <input type="text" id="playlistUrl" placeholder="Pega el link de la playlist de YouTube aquí..."
+                    autocomplete="off">
+                <button id="loadPlaylist" class="btn btn-primary">
+                    <span class="btn-text">Cargar</span>
+                    <span class="btn-loader"></span>
+                </button>
+            </div>
+            <div class="input-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4" />
+                    <path d="M12 8h.01" />
+                </svg>
+                <span>Soporta playlists públicas y no listadas de YouTube</span>
+            </div>
+        </section>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message hidden">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+            <span id="errorText"></span>
+        </div>
+
+        <!-- Playlist Info Section -->
+        <section id="playlistInfo" class="playlist-info glass-card hidden">
+            <div class="playlist-header">
+                <div class="playlist-details">
+                    <h2 id="playlistTitle">Nombre de la Playlist</h2>
+                    <p id="playlistChannel" class="channel-name">Canal</p>
+                    <div class="playlist-stats">
+                        <span class="stat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18V5l12-2v13" />
+                                <circle cx="6" cy="18" r="3" />
+                                <circle cx="18" cy="16" r="3" />
+                            </svg>
+                            <span id="songCount">0</span> canciones
+                        </span>
+                        <span class="stat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            <span id="totalDuration">0:00</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="playlist-actions">
+                    <div class="format-selector">
+                        <label>Formato:</label>
+                        <div class="format-buttons">
+                            <button class="format-btn active" data-format="mp3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18V5l12-2v13" />
+                                    <circle cx="6" cy="18" r="3" />
+                                    <circle cx="18" cy="16" r="3" />
+                                </svg>
+                                MP3
+                            </button>
+                            <button class="format-btn" data-format="mp4">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="23 7 16 12 23 17 23 7" />
+                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                                </svg>
+                                MP4
+                            </button>
+                        </div>
+                    </div>
+                    <div class="quality-selector">
+                        <label>Calidad:</label>
+                        <div class="quality-buttons" id="qualityButtons">
+                            <!-- MP3 Quality Options -->
+                            <div class="quality-options mp3-quality" id="mp3Quality">
+                                <button class="quality-btn" data-quality="128">128k</button>
+                                <button class="quality-btn" data-quality="192">192k</button>
+                                <button class="quality-btn active" data-quality="256">256k</button>
+                                <button class="quality-btn" data-quality="320">320k</button>
+                            </div>
+                            <!-- MP4 Quality Options -->
+                            <div class="quality-options mp4-quality hidden" id="mp4Quality">
+                                <button class="quality-btn" data-quality="360">360p</button>
+                                <button class="quality-btn" data-quality="480">480p</button>
+                                <button class="quality-btn active" data-quality="720">720p</button>
+                                <button class="quality-btn" data-quality="1080">1080p</button>
+                                <button class="quality-btn" data-quality="2160">4K</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Options Panel -->
+            <div class="advanced-options">
+                <button class="toggle-options-btn" id="toggleOptions">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M12 1v6m0 10v6M1 12h6m10 0h6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24" />
+                    </svg>
+                    Opciones Avanzadas
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
+                <div class="options-content hidden" id="optionsContent">
+                    <div class="option-group">
+                        <label for="filenameTemplate">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                            Plantilla de nombre:
+                        </label>
+                        <select id="filenameTemplate" class="template-select">
+                            <option value="%(title)s">Solo título</option>
+                            <option value="%(uploader)s - %(title)s">Artista - Título</option>
+                            <option value="%(title)s - %(uploader)s">Título - Artista</option>
+                            <option value="%(playlist_index)s. %(title)s">Número. Título</option>
+                            <option value="%(uploader)s - %(title)s (%(upload_date)s)">Artista - Título (Fecha)
+                            </option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="embedMetadata" checked>
+                            <span class="checkmark"></span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18V5l12-2v13" />
+                                <circle cx="6" cy="18" r="3" />
+                                <circle cx="18" cy="16" r="3" />
+                            </svg>
+                            Incluir metadatos (carátula, artista, álbum)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selection-bar">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="selectAll" checked>
+                    <span class="checkmark"></span>
+                    <span>Seleccionar todas</span>
+                </label>
+                <div class="selection-info">
+                    <span id="selectedCount" class="selected-count">0 seleccionadas</span>
+                    <span id="estimatedSize" class="estimated-size"></span>
+                </div>
+            </div>
+
+            <div id="songList" class="song-list">
+                <!-- Songs will be inserted here -->
+            </div>
+
+            <div class="download-section">
+                <button id="downloadBtn" class="btn btn-download">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Descargar Seleccionadas</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="downloadProgress" class="download-progress glass-card hidden">
+            <div class="progress-header">
+                <h3>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Descargando...
+                </h3>
+                <div class="overall-progress">
+                    <span id="progressText">0 / 0</span>
+                    <div class="progress-bar-container">
+                        <div id="overallProgressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Statistics Panel -->
+            <div class="stats-panel">
+                <div class="stat-card">
+                    <div class="stat-icon speed-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">Velocidad Total</span>
+                        <span id="globalSpeed" class="stat-value">-- MB/s</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon time-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">Tiempo Transcurrido</span>
+                        <span id="elapsedTime" class="stat-value">00:00</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon eta-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v4" />
+                            <path d="M12 18v4" />
+                            <path d="m4.93 4.93 2.83 2.83" />
+                            <path d="m16.24 16.24 2.83 2.83" />
+                            <path d="M2 12h4" />
+                            <path d="M18 12h4" />
+                            <path d="m4.93 19.07 2.83-2.83" />
+                            <path d="m16.24 7.76 2.83-2.83" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">Tiempo Restante</span>
+                        <span id="estimatedTime" class="stat-value">Calculando...</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon active-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">Descargas Activas</span>
+                        <span id="activeDownloads" class="stat-value">0 / 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="downloadList" class="download-list">
+                <!-- Download items will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Completed Section -->
+        <section id="completedSection" class="completed-section glass-card hidden">
+            <div class="completed-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+            </div>
+            <h3>¡Descarga Completada!</h3>
+            <p id="completedMessage">Se descargaron 0 canciones</p>
+
+            <div id="fileList" class="file-list">
+                <!-- File links will be inserted here -->
+            </div>
+
+            <div class="completed-actions">
+                <button id="newDownload" class="btn btn-secondary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Nueva Descarga
+                </button>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section class="support-section glass-card">
+            <div class="support-content">
+                <div class="support-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                </div>
+                <div class="support-text">
+                    <h3>¿Te gusta PlaylistDL?</h3>
+                    <p>Ayúdanos a mantener el servicio gratuito y sin límites. Tu apoyo nos permite seguir
+                        mejorando.
+                    </p>
+                </div>
+                <div class="support-buttons">
+                    <a href="https://ko-fi.com/tuusuario" target="_blank" rel="noopener"
+                        class="btn btn-support btn-kofi">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z" />
+                        </svg>
+                        Invítame un café
+                    </a>
+                    <a href="https://github.com/tuusuario/DescargarPlaylist" target="_blank" rel="noopener"
+                        class="btn btn-support btn-github">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        Dar ⭐ en GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18V5l12-2v13" />
+                            <circle cx="6" cy="18" r="3" />
+                            <circle cx="18" cy="16" r="3" />
+                        </svg>
+                        <span>PlaylistDL</span>
+                    </div>
+                    <p class="footer-description">La forma más fácil de descargar música de YouTube. Rápido,
+                        gratis y
+                        sin complicaciones.</p>
+                </div>
+                <div class="footer-info">
+                    <div class="footer-stats">
+                        <div class="footer-stat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <span>Descargas ilimitadas</span>
+                        </div>
+                        <div class="footer-stat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <span>100% Seguro</span>
+                        </div>
+                        <div class="footer-stat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            <span>Disponible 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Hecho con ❤️ usando <a href="https://github.com/yt-dlp/yt-dlp" target="_blank"
+                        rel="noopener">yt-dlp</a></p>
+                <p class="footer-disclaimer">Este servicio es solo para uso personal. Respeta los derechos de
+                    autor.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
