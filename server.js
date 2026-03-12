@@ -375,8 +375,8 @@ io.on('connection', (socket) => {
             sessionDir: sessionId
         });
 
-        // Descargar con 6 descargas simultáneas
-        await downloadWithConcurrency(songs, sessionDir, format, socket, 6, downloadOptions);
+        // Descargar con 3 descargas simultáneas (más estable que 6)
+        await downloadWithConcurrency(songs, sessionDir, format, socket, 3, downloadOptions);
 
         // Obtener lista de archivos descargados
         let files = [];
@@ -439,7 +439,7 @@ function downloadSong(song, outputDir, format, options, onProgress) {
                     '--embed-thumbnail',           // Carátula
                     '--embed-metadata',            // Metadatos generales
                     '--add-metadata',              // Añadir metadatos al archivo
-                    '--parse-metadata', `title:%(title)s`,
+                    // No hace falta parse-metadata title, yt-dlp ya lo hace bien
                     '--parse-metadata', `${song.artist || song.channel}:%(artist)s`,
                     '--parse-metadata', `${song.album || 'YouTube'}:%(album)s`,
                     '--convert-thumbnails', 'jpg'  // Convertir thumbnail a jpg para compatibilidad
@@ -462,10 +462,13 @@ function downloadSong(song, outputDir, format, options, onProgress) {
             }
         }
 
+        args.push('--no-check-certificate');
         args.push(song.url);
 
         const ytdlp = spawn(YTDLP_CMD, args);
         let lastProgress = 0;
+
+        let errorOutput = '';
 
         ytdlp.stdout.on('data', (data) => {
             const output = data.toString();
@@ -536,15 +539,16 @@ function downloadSong(song, outputDir, format, options, onProgress) {
         });
 
         ytdlp.stderr.on('data', (data) => {
-            // Silenciar errores stderr para no saturar la consola
-            // console.error(`stderr: ${data}`);
+            const errorStr = data.toString();
+            errorOutput += errorStr;
+            console.error(`yt-dlp stderr [${song.title}]: ${errorStr}`);
         });
 
         ytdlp.on('close', (code) => {
             if (code === 0) {
                 resolve();
             } else {
-                reject(new Error(`yt-dlp terminó con código ${code}`));
+                reject(new Error(`yt-dlp terminó con código ${code}: ${errorOutput.trim() || 'Desconocido'}`));
             }
         });
 
@@ -573,6 +577,16 @@ function cleanOldDownloads() {
 
 // Limpiar cada 30 minutos
 setInterval(cleanOldDownloads, 30 * 60 * 1000);
+
+// Verificar si ffmpeg está instalado al iniciar
+exec('ffmpeg -version', (error) => {
+    if (error) {
+        console.error('⚠️ ATENCIÓN: ffmpeg no parece estar instalado o no está en el PATH.');
+        console.error('La conversión a MP3 y el merge de video/audio en MP4 de alta calidad podrían fallar.');
+    } else {
+        console.log('✅ ffmpeg detectado correctamente');
+    }
+});
 
 httpServer.listen(PORT, () => {
     console.log(`🎵 Servidor corriendo en http://localhost:${PORT}`);
